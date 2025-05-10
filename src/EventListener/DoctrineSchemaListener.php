@@ -45,7 +45,7 @@ class DoctrineSchemaListener
                 $notnull = ($arrField['null'] ?? '') === 'NOT NULL';
                 $autoincrement = ($arrField['extra'] ?? '') === 'auto_increment';
 
-                $origin_type = $arrField['origtype'] ? strtok(strtolower($arrField['origtype']), '(), ') : '';
+                $origin_type = isset($arrField['origtype']) ? strtok(strtolower($arrField['origtype']), '(), ') : '';
                 $connection = $this->doctrine->getConnection();
 
                 try {

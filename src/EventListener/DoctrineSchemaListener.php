@@ -40,10 +40,10 @@ class DoctrineSchemaListener
                     continue;
                 }
 
-                $default = $arrField['default'];
-                $unsigned = ($arrField['attributes'] ?? '') == 'unsigned';
-                $notnull = ($arrField['null'] ?? '') == 'NOT NULL';
-                $autoincrement = ($arrField['extra'] ?? '') == 'auto_increment';
+                $default = $arrField['default'] ?? '';
+                $unsigned = ($arrField['attributes'] ?? '') === 'unsigned';
+                $notnull = ($arrField['null'] ?? '') === 'NOT NULL';
+                $autoincrement = ($arrField['extra'] ?? '') === 'auto_increment';
 
                 $origin_type = strtok(strtolower($arrField['origtype']), '(), ');
                 $connection = $this->doctrine->getConnection();
@@ -56,7 +56,7 @@ class DoctrineSchemaListener
                     $arrOptions = [
                         'length' => $length,
                         'unsigned' => $unsigned,
-                        'fixed' => $origin_type == 'char',
+                        'fixed' => $origin_type === 'char',
                         'default' => $default,
                         'notnull' => $notnull,
                         'scale' => null,
@@ -67,7 +67,7 @@ class DoctrineSchemaListener
 
                     $objTable->addColumn($strField, $type, $arrOptions);
 
-                    if ($strField == 'id') {
+                    if ($strField === 'id') {
                         $objTable->setPrimaryKey([$strField]);
                     }
 

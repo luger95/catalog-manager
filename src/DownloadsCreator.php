@@ -107,7 +107,7 @@ class DownloadsCreator extends Frontend
                     'path' => $objFile->dirname,
                     'link' => $arrMeta['title'],
                     'name' => $objFile->basename,
-                    'caption' => $arrMeta['caption'],
+                    'caption' => $arrMeta['caption'] ?? '',
                     'extension' => $objFile->extension,
                     'icon' => Image::getPath($objFile->icon),
                     'filesize' => $this->getReadableSize($objFile->filesize, 1),
